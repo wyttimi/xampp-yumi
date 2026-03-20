@@ -74,9 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 require_once "includes/header.php";
 
-// Calculate days since joined
-$joined_days = floor((time() - strtotime($user["created_at"])) / 86400);
-$joined_text = $joined_days < 1 ? "Today" : $joined_days . " days ago";
 ?>
 
 <!-- Profile Cover -->
@@ -101,22 +98,6 @@ $joined_text = $joined_days < 1 ? "Today" : $joined_days . " days ago";
         <div class="pf-hero-badges">
             <span class="pf-badge pf-badge-role"><i class="fa fa-crown"></i> <?php echo ucfirst($user["role"]); ?></span>
             <span class="pf-badge pf-badge-date"><i class="fa fa-calendar"></i> Joined <?php echo date("M Y", strtotime($user["created_at"])); ?></span>
-        </div>
-        <div class="pf-hero-stats">
-            <div class="pf-stat">
-                <span class="pf-stat-num"><?php echo $joined_days; ?></span>
-                <span class="pf-stat-label">Days</span>
-            </div>
-            <div class="pf-stat-divider"></div>
-            <div class="pf-stat">
-                <span class="pf-stat-num"><?php echo strtoupper(substr($user["role"], 0, 1)); ?></span>
-                <span class="pf-stat-label">Tier</span>
-            </div>
-            <div class="pf-stat-divider"></div>
-            <div class="pf-stat">
-                <span class="pf-stat-num"><i class="fa fa-check-circle" style="color:#2f855a;font-size:18px;"></i></span>
-                <span class="pf-stat-label">Verified</span>
-            </div>
         </div>
     </div>
 </div>
@@ -358,35 +339,6 @@ $joined_text = $joined_days < 1 ? "Today" : $joined_days . " days ago";
         background: #f7f7f7;
         color: #888;
         border: 1px solid #eee;
-    }
-    .pf-hero-stats {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        padding-top: 22px;
-        border-top: 1px solid #f0f0f0;
-    }
-    .pf-stat { text-align: center; }
-    .pf-stat-num {
-        display: block;
-        font-family: 'Playfair Display', serif;
-        font-size: 22px;
-        font-weight: 700;
-        color: #000;
-    }
-    .pf-stat-label {
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: #aaa;
-        margin-top: 2px;
-        display: block;
-    }
-    .pf-stat-divider {
-        width: 1px;
-        height: 35px;
-        background: #eee;
     }
 
     /* ===== Body & Grid ===== */

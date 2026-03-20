@@ -66,7 +66,9 @@ require_once "../includes/header.php";
 ?>
 
 <div class="login-page-wrapper">
-    <div class="login-image-side" style="background-image: url('https://images.unsplash.com/photo-1581044777550-4cfa60707998?auto=format&fit=crop&q=80&w=2070');"></div>
+    <div class="login-image-side">
+        <img src="/clothing_shop/banner/Sign Up Banner.jpg" class="login-banner" alt="Sign Up">
+    </div>
     <div class="login-form-side">
         <div class="container">
             <h2>Join Us</h2>

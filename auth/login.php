@@ -56,7 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="login-page-wrapper">
-    <div class="login-image-side"></div>
+    <div class="login-image-side">
+        <img src="/clothing_shop/banner/Login Banner.jpg" class="login-banner" alt="Login">
+    </div>
     <div class="login-form-side">
         <div class="container">
             <!-- Logo -->
