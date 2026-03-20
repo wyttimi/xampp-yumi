@@ -20,9 +20,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <nav style="background:black; color:white; padding:15px; display:flex; justify-content:space-between; align-items:center;">
 
-        <div style="font-size:20px; font-weight:bold; font-family: 'Playfair Display', serif;">
+        <a href="/clothing_shop/index.php" style="font-size:20px; font-weight:bold; font-family: 'Playfair Display', serif; color:white; text-decoration:none;">
             Clothing Shop
-        </div>
+        </a>
 
         <div style="display:flex; align-items:center; gap:20px;">
             <a href="/clothing_shop/index.php" style="color:white; text-decoration:none; font-size:14px; text-transform:uppercase; letter-spacing:1px;">Home</a>

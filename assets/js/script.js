@@ -20,4 +20,15 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+
+    // Profile Dropdown Toggle using jQuery
+    $(document).on('click', '.profile-trigger', function(e) {
+        e.stopPropagation();
+        $('.dropdown').toggleClass('active');
+    });
+
+    // Close dropdown when clicking outside
+    $(document).on('click', function() {
+        $('.dropdown').removeClass('active');
+    });
 });
