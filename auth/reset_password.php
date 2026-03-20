@@ -7,6 +7,7 @@ $errors = [];
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $is_ajax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     $username = trim($_POST["username"] ?? "");
     $full_name = trim($_POST["full_name"] ?? "");
     $new_password = trim($_POST["new_password"] ?? "");
@@ -32,14 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $new_hash = password_hash($new_password, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("UPDATE users SET password_hash = ? WHERE user_id = ?");
                 $stmt->execute([$new_hash, $user["user_id"]]);
+
+                if ($is_ajax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(["success" => true, "message" => "Password reset successful. You can login now."]);
+                    exit;
+                }
                 $_SESSION["reset_success"] = "Password reset successful. You can login now.";
-                // JavaScript replace overwrites the current entry in history
                 echo "<script>window.location.replace('reset_password.php');</script>";
                 exit;
             }
         } else {
             $errors[] = "Username and full name do not match any account.";
         }
+    }
+
+    if ($is_ajax && !empty($errors)) {
+        header('Content-Type: application/json');
+        echo json_encode(["success" => false, "errors" => $errors]);
+        exit;
     }
 }
 
@@ -103,6 +115,44 @@ require_once "../includes/header.php";
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    $(document).ready(function() {
+        $('.container form').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var btn = form.find('button[type="submit"]');
+            btn.prop('disabled', true).text('Resetting...');
+            $('.container .message').remove();
+
+            $.ajax({
+                url: 'reset_password.php',
+                type: 'POST',
+                data: form.serialize(),
+                dataType: 'json',
+                success: function(res) {
+                    var msgClass = res.success ? 'success' : 'error';
+                    var icon = res.success ? 'fa-check-circle' : 'fa-exclamation-circle';
+                    var content = '';
+                    if (res.errors) {
+                        content = '<ul>';
+                        res.errors.forEach(function(err) { content += '<li>' + err + '</li>'; });
+                        content += '</ul>';
+                    } else {
+                        content = ' ' + res.message;
+                    }
+                    var msgHtml = '<div class="message ' + msgClass + '"><i class="fa ' + icon + '"></i>' + content + '</div>';
+                    form.before(msgHtml);
+                    if (res.success) form[0].reset();
+                },
+                error: function() {
+                    form.before('<div class="message error"><i class="fa fa-exclamation-circle"></i> Something went wrong. Please try again.</div>');
+                },
+                complete: function() {
+                    btn.prop('disabled', false).text('Reset Password');
+                }
+            });
+        });
+    });
 </script>
 
 <?php require_once "../includes/footer.php"; ?>
