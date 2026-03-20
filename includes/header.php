@@ -18,34 +18,53 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <body>
 
-    <nav style="background:black; color:white; padding:15px; display:flex; justify-content:space-between; align-items:center;">
-
-        <a href="/clothing_shop/index.php" style="font-size:20px; font-weight:bold; font-family: 'Playfair Display', serif; color:white; text-decoration:none;">
+    <nav class="main-nav">
+        <!-- Logo -->
+        <a href="<?php echo (isset($_SESSION["role"]) && $_SESSION["role"] === 'admin') ? '/clothing_shop/admin/dashboard.php' : '/clothing_shop/index.php'; ?>" class="nav-logo">
+            <span class="nav-logo-icon"><i class="fa fa-scissors"></i></span>
             Clothing Shop
         </a>
 
-        <div style="display:flex; align-items:center; gap:20px;">
-            <a href="/clothing_shop/index.php" style="color:white; text-decoration:none; font-size:14px; text-transform:uppercase; letter-spacing:1px;">Home</a>
+        <!-- Nav Links -->
+        <div class="nav-links">
+            <?php if (isset($_SESSION["user_id"]) && $_SESSION["role"] === 'admin'): ?>
+                <a href="/clothing_shop/admin/dashboard.php" class="nav-link nav-link-admin">
+                    <i class="fa fa-gauge-high"></i> Dashboard
+                </a>
+            <?php else: ?>
+                <a href="/clothing_shop/index.php" class="nav-link">Home</a>
+            <?php endif; ?>
 
             <?php if (isset($_SESSION["user_id"])): ?>
-                <?php if ($_SESSION["role"] === 'admin'): ?>
-                    <a href="/clothing_shop/admin/dashboard.php" style="color:#d4af37; text-decoration:none; font-size:14px; text-transform:uppercase; letter-spacing:1px; font-weight:bold;">Admin Dashboard</a>
-                <?php endif; ?>
+
+                <div class="nav-divider"></div>
+
                 <div class="profile-menu">
                     <div class="profile-trigger">
-                        <img src="<?php echo $_SESSION["profile_photo"] ?? 'https://via.placeholder.com/40'; ?>"
-                            style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:1px solid #fff;">
-                        <span style="font-size:13px; font-weight:500;"><?php echo htmlspecialchars($_SESSION["username"]); ?></span>
+                        <?php if (!empty($_SESSION["profile_photo"])): ?>
+                            <img src="/clothing_shop/<?php echo htmlspecialchars($_SESSION["profile_photo"]); ?>" class="nav-avatar">
+                        <?php else: ?>
+                            <div class="nav-avatar-placeholder"><i class="fa fa-user"></i></div>
+                        <?php endif; ?>
+                        <span class="nav-username"><?php echo htmlspecialchars($_SESSION["username"]); ?></span>
+                        <i class="fa fa-chevron-down nav-caret"></i>
                     </div>
 
                     <div class="dropdown">
-                        <a href="/clothing_shop/profile.php">My Profile</a>
-                        <a href="/clothing_shop/auth/logout.php" class="logout-link">Logout</a>
-                    </div>                </div>
+                        <div class="dropdown-header">
+                            <span class="dropdown-name"><?php echo htmlspecialchars($_SESSION["username"]); ?></span>
+                            <span class="dropdown-role"><?php echo strtoupper($_SESSION["role"]); ?></span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="/clothing_shop/profile.php"><i class="fa fa-user"></i> My Profile</a>
+                        <a href="/clothing_shop/change_password.php"><i class="fa fa-shield-halved"></i> Security</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/clothing_shop/auth/logout.php" class="logout-link dropdown-logout"><i class="fa fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
             <?php else: ?>
-                <a href="/clothing_shop/auth/login.php" style="color:white; text-decoration:none; font-size:14px; text-transform:uppercase; letter-spacing:1px;">Login</a>
-                <a href="/clothing_shop/auth/register.php" style="color:white; text-decoration:none; font-size:14px; text-transform:uppercase; letter-spacing:1px;">Register</a>
+                <a href="/clothing_shop/auth/login.php" class="nav-link">Login</a>
+                <a href="/clothing_shop/auth/register.php" class="nav-btn">Register</a>
             <?php endif; ?>
         </div>
-
     </nav>

@@ -9,6 +9,12 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: auth/login.php");
     exit;
 }
+
+// Admin should use the admin dashboard instead
+if ($_SESSION["role"] === "admin") {
+    header("Location: admin/dashboard.php");
+    exit;
+}
 ?>
 
 <?php
