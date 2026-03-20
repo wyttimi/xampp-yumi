@@ -95,7 +95,8 @@ require_once "../includes/header.php";
     .admin-hero {
         position: relative;
         height: 260px;
-        background: #000;
+        background: url('/clothing_shop/banner/admin banner.jpg') no-repeat center center;
+        background-size: cover;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -103,7 +104,7 @@ require_once "../includes/header.php";
     .admin-hero-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #333 100%);
+        background: rgba(0, 0, 0, 0.5);
     }
     .admin-hero-content {
         position: relative;

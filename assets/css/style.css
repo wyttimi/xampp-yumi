@@ -35,20 +35,6 @@ body {
     object-position: center;
 }
 
-/* Pages with header (register, reset) */
-.login-with-header {
-    height: calc(100vh - 72px);
-}
-.login-with-header .login-image-side {
-    height: calc(100vh - 72px);
-}
-.login-with-header .login-image-side img.login-banner {
-    height: calc(100vh - 72px);
-}
-.login-with-header .login-form-side {
-    height: calc(100vh - 72px);
-}
-
 .login-form-side {
     flex: 1;
     min-width: 480px;
