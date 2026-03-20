@@ -21,9 +21,22 @@ body {
 
 .login-image-side {
     flex: 1;
-    background: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
-    background-size: cover;
-    display: block;
+    background: #f9f7f4 no-repeat center center;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-illustration {
+    max-width: 320px;
+    max-height: 320px;
+    object-fit: contain;
+    opacity: 0.9;
+    transition: transform 0.5s ease;
+}
+.login-illustration:hover {
+    transform: scale(1.05) rotate(-2deg);
 }
 
 .login-form-side {
