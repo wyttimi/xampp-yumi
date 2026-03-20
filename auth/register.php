@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 require_once "../includes/header.php"; 
 ?>
 
-<div class="login-page-wrapper">
+<div class="login-page-wrapper login-with-header">
     <div class="login-image-side">
         <img src="/clothing_shop/banner/Sign Up Banner.jpg" class="login-banner" alt="Sign Up">
     </div>
