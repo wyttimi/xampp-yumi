@@ -1,0 +1,40 @@
+http://localhost/clothing_shop/
+
+database name : clothing_db
+SQL tab > 
+-- 1. Create the new simplified table
+CREATE TABLE users (
+user_id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(50) NOT NULL UNIQUE,
+full_name VARCHAR(100) NOT NULL,
+password_hash VARCHAR(255) NOT NULL,
+role VARCHAR(20) NOT NULL DEFAULT 'member', 
+profile_photo VARCHAR(255) DEFAULT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+-- 2. Insert the default Admin account (Password: admin123)
+INSERT INTO users (username, full_name, password_hash, role)
+VALUES (
+'admin',
+'Shop Administrator',
+'$2y$10$K6Z7dQm3Vx8r0g.9yZz9D.3zB9nq5xZt9m4bN4v6lFZpQv5x3m2gG',
+'admin'
+);
+about the password for admin if invalid
+then create a temporary file clothing_shop/hash.php
+<?php echo password_hash("admin123", PASSWORD_DEFAULT);
+open browser > http://localhost/clothing_shop/hash.php
+***copy the whole hash***
+
+go back to phpMyAdmin > SQL tab
+
+UPDATE users
+SET password_hash = 'paste the whole hash'
+WHERE username = 'admin';
+
+username = admin
+password = admin123
+
+if works then MUST delete the hash.php file
+(for security+marks)

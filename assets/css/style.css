@@ -1,0 +1,299 @@
+/* Professional Clothing Shop Theme */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fcfcfc;
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout Wrapper for Professional Login */
+.login-page-wrapper {
+    display: flex;
+    min-height: calc(100vh - 70px); /* Adjust based on header height */
+    background: #fff;
+}
+
+.login-image-side {
+    flex: 1;
+    background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
+    background-size: cover;
+    display: block;
+}
+
+.login-form-side {
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.container {
+    width: 100%;
+    max-width: 380px;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+/* High-End Typography */
+h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: left;
+    margin-bottom: 8px;
+    color: #000;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #1a1a1a;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
+    font-size: 15px;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom-color: #000;
+}
+
+/* Icons adjusted for minimalist look */
+.input-group i:not(.password-toggle) {
+    display: none; /* Hide icons for a cleaner boutique look, or reposition them */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 18px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #333;
+    letter-spacing: 3px;
+}
+
+.message.error ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.message.error li {
+    margin-bottom: 8px; /* Increased line space between errors */
+    font-size: 13px;    /* Slightly bigger font as requested */
+    color: inherit;
+}
+
+.message.error li:last-child {
+    margin-bottom: 0;
+}
+
+/* Remove the dash prefix */
+.message.error li::before {
+    content: none;
+}
+
+.message i {
+    margin-right: 10px;
+    float: left;
+    margin-top: 2px;
+}
+
+.message {
+    padding: 15px;
+    font-size: 13px;
+    margin-bottom: 35px; /* More space between error box and form fields like Full Name */
+    border-left: 3px solid transparent;
+    line-height: 1.6;
+}
+
+.error {
+    background-color: #fff5f5;
+    color: #c53030;
+    border-left-color: #c53030;
+}
+
+.success {
+    background-color: #f0fff4;
+    color: #2f855a;
+    border-left-color: #2f855a;
+}
+
+.auth-links {
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-links a {
+    color: #1a1a1a;
+    font-size: 13px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+    transition: border-color 0.3s;
+}
+
+.auth-links a:hover {
+    border-bottom-color: #000;
+}
+
+/* Profile Menu Styles (Restored and Refined) */
+.profile-menu { position: relative; padding-bottom: 10px; }
+.profile-trigger { display: flex; align-items: center; gap: 8px; cursor: pointer; color: white; }
+.dropdown {
+    display: none; position: absolute; right: 0; top: 100%;
+    background: white; color: black; border-radius: 0;
+    min-width: 180px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden; opacity: 0; visibility: hidden; transition: 0.3s;
+}
+.dropdown a { display: block; padding: 12px 20px; text-decoration: none; color: black; font-size: 13px; }
+/* Profile Page Professional Styling */
+.profile-card {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+}
+
+.profile-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.profile-info p {
+    color: #888;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.profile-form-section {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: #000;
+    border: 1px solid #000;
+    margin-top: 10px;
+}
+
+.secondary-btn:hover {
+    background: #f9f9f9;
+    letter-spacing: 2px;
+}
+
+.action-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.action-links-grid a {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    text-decoration: none;
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.action-links-grid a:hover {
+    border-color: #000;
+    color: #000;
+}
+@media (max-width: 850px) {
+    .login-image-side { display: none; }
+    .login-form-side { width: 100%; }
+    .login-page-wrapper { justify-content: center; }
+}
