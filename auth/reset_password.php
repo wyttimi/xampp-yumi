@@ -59,7 +59,7 @@ require_once "../includes/header.php";
 ?>
 
 <div class="login-page-wrapper">
-    <div class="login-image-side" style="background-image: url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=2070');"></div>
+    <div class="login-image-side" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=2070');"></div>
     <div class="login-form-side">
         <div class="container">
             <h2>Reset Password</h2>

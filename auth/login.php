@@ -43,12 +43,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<?php require_once "../includes/header.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - VELURA</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="/clothing_shop/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
 
 <div class="login-page-wrapper">
     <div class="login-image-side"></div>
     <div class="login-form-side">
         <div class="container">
+            <!-- Logo -->
+            <div class="auth-logo">
+                <div class="auth-logo-mark">V</div>
+                <div class="auth-logo-text">
+                    <span class="auth-logo-name">VELURA</span>
+                    <span class="auth-logo-sub">CLOTHING CO.</span>
+                </div>
+            </div>
+
             <h2>Welcome Back</h2>
             <p class="subtitle">Please enter your details to continue</p>
 
@@ -128,6 +147,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     color: #fff !important;
     border-color: #000;
 }
+
+/* Auth Page Logo */
+.auth-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+.auth-logo-mark {
+    width: 38px;
+    height: 38px;
+    background: #000;
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.auth-logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 3px;
+}
+.auth-logo-sub {
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #999;
+    margin-top: 3px;
+    font-weight: 500;
+}
 </style>
 
-<?php require_once "../includes/footer.php"; ?>
+<script src="/clothing_shop/assets/js/script.js"></script>
+</body>
+</html>

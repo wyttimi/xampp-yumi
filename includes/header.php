@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clothing Shop</title>
+    <title>VELURA - Clothing Co.</title>
     <!-- jQuery Library (Required by Assignment) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="/clothing_shop/assets/css/style.css">
@@ -21,8 +21,11 @@ if (session_status() === PHP_SESSION_NONE) {
     <nav class="main-nav">
         <!-- Logo -->
         <a href="<?php echo (isset($_SESSION["role"]) && $_SESSION["role"] === 'admin') ? '/clothing_shop/admin/dashboard.php' : '/clothing_shop/index.php'; ?>" class="nav-logo">
-            <span class="nav-logo-icon"><i class="fa fa-scissors"></i></span>
-            Clothing Shop
+            <div class="nav-logo-mark">V</div>
+            <div class="nav-logo-text">
+                <span class="nav-logo-name">VELURA</span>
+                <span class="nav-logo-sub">CLOTHING CO.</span>
+            </div>
         </a>
 
         <!-- Nav Links -->
