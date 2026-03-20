@@ -100,7 +100,7 @@ $user = $stmt->fetch();
     .hero-banner {
         position: relative;
         height: 340px;
-        background: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
+        background: url('https://images.unsplash.com/photo-1558171813-4c088753af8f?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
         background-size: cover;
         display: flex;
         align-items: center;

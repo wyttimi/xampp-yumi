@@ -21,7 +21,7 @@ body {
 
 .login-image-side {
     flex: 1;
-    background: url('https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
+    background: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=2070') no-repeat center center;
     background-size: cover;
     display: block;
 }
