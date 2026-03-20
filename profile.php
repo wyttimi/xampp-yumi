@@ -13,9 +13,11 @@ $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $is_ajax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     $full_name = trim($_POST["full_name"]);
     $photo_path = $user["profile_photo"];
     $new_photo_uploaded = !empty($_FILES["profile_photo"]["name"]);
+    $response = ["success" => false, "message" => ""];
 
     if ($full_name === "") {
         $error = "Full name cannot be empty.";
@@ -44,18 +46,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($error === "") {
             if ($full_name === $user["full_name"] && !$new_photo_uploaded) {
-                $_SESSION["prof_success"] = "No changes have been made.";
+                $response = ["success" => true, "message" => "No changes have been made."];
             } else {
                 $stmt = $pdo->prepare("UPDATE users SET full_name = ?, profile_photo = ? WHERE user_id = ?");
                 $stmt->execute([$full_name, $photo_path, $user_id]);
                 $_SESSION["profile_photo"] = $photo_path;
-                $_SESSION["prof_success"] = "Profile updated successfully.";
+                $response = ["success" => true, "message" => "Profile updated successfully.", "full_name" => $full_name, "photo" => $photo_path];
             }
 
-            // JavaScript replace overwrites the current entry in history
+            if ($is_ajax) {
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            }
+            $_SESSION["prof_success"] = $response["message"];
             echo "<script>window.location.replace('profile.php');</script>";
             exit;
         }
+    }
+
+    if ($is_ajax) {
+        header('Content-Type: application/json');
+        echo json_encode(["success" => false, "message" => $error]);
+        exit;
     }
 }
 
@@ -116,10 +129,52 @@ require_once "includes/header.php";
 </div>
 
 <script>
-    // This cleans up the history state immediately after loading
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    $(document).ready(function() {
+        $('.profile-form-section').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var formData = new FormData(this);
+            var btn = form.find('button[type="submit"]');
+            btn.prop('disabled', true).text('Updating...');
+
+            // Remove existing messages
+            $('.profile-card .message').remove();
+
+            $.ajax({
+                url: 'profile.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(res) {
+                    var msgClass = res.success ? 'success' : 'error';
+                    var icon = res.success ? 'fa-check-circle' : 'fa-exclamation-circle';
+                    var msgHtml = '<div class="message ' + msgClass + '"><i class="fa ' + icon + '"></i> ' + res.message + '</div>';
+                    form.before(msgHtml);
+
+                    if (res.success && res.full_name) {
+                        $('.profile-info h3').text(res.full_name);
+                    }
+                    if (res.success && res.photo) {
+                        $('.profile-avatar').attr('src', res.photo);
+                    }
+                    // Reset file input
+                    $('#profile_photo').val('');
+                },
+                error: function() {
+                    form.before('<div class="message error"><i class="fa fa-exclamation-circle"></i> Something went wrong. Please try again.</div>');
+                },
+                complete: function() {
+                    btn.prop('disabled', false).text('Update Account');
+                }
+            });
+        });
+    });
 </script>
 
 <?php require_once "includes/footer.php"; ?>
